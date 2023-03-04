@@ -4,7 +4,6 @@ $.verbose = false
 
 const DISK_LABEL = 'reserve'
 const MOUNT_PATH = '/media/reserve'
-const PVE_DUMP_PATH = '/var/lib/vz/dump/'
 
 // ищем диск по метке
 const disk = JSON.parse((await $`lsblk --json --list --output PATH,LABEL,MOUNTPOINT`).stdout)
@@ -25,6 +24,7 @@ if (!disk.mountpoint)
 
 // TODO выделить общую часть в отдельный общий файл
 
+const PVE_DUMP_PATH = '/var/lib/vz/dump/'
 const BACKUP_DIR = 'backup_pve'
 
 if (!(await fs.exists(`${MOUNT_PATH}/${BACKUP_DIR}`)))
